@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    text-decoration: none;
+    color: rgb(54, 54, 56);
+}
+
+:root {
+    --main-bg-color: rgb(252, 246, 246);
+    --primary-color: #74a1de;
+    --secondary-color: #fd0000;
+}
+
+.active {
+    color: var(--secondary-color) !important;
+}

@@ -1,0 +1,17 @@
+.navbar {
+    ul {
+        list-style: none;
+        display: inline-flex;
+        margin: 0;
+
+        li {
+            margin-left: 1rem;
+            padding: 1rem;
+            cursor: pointer;
+
+            a {
+                color: inherit;
+            }
+        }
+    }
+}
