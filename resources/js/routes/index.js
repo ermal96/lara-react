@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { paths } from "./paths";
-import { Home, About, Blog, Contact } from "../pages";
+import { Home, About, Blog, Contact, Register } from "../pages";
 import { Layout } from "../components";
 
 export const Routes = () => {
     return (
-        <Router>
+        <Router basename="/">
             <Switch>
                 <Route exact path={paths.home}>
                     <Layout>
@@ -26,6 +26,11 @@ export const Routes = () => {
                 <Route exact path={paths.contact}>
                     <Layout>
                         <Contact />
+                    </Layout>
+                </Route>
+                <Route exact path={paths.register}>
+                    <Layout>
+                        <Register />
                     </Layout>
                 </Route>
             </Switch>

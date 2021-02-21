@@ -27,6 +27,11 @@ const Navbar = () => {
                         Contact
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink exact to={paths.register}>
+                        Register
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     );

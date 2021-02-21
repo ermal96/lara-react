@@ -9,10 +9,12 @@ class AppController extends Controller
     public function init()
     {
 
-        if (DB::connection()->getDatabaseName()) {
-            return response()->json(['success' => true, 'message' => 'Conected with db'], 200);
-        } else {
-            return response()->json(['success' => false, 'message' => 'Conection with db failed'], 500);
+        try {
+            DB::connection()->getPdo();
+            return response()->json(['status' => true, 'success' => 'Conected with db'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['status' => false, 'failed' => 'Conection with db failed'], 500);
+            die();
         }
 
     }

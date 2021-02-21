@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\PostsController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +17,6 @@ use App\Http\Controllers\PostsController;
 // App Route
 Route::get('/init', [AppController::class, 'init']);
 
-Route::get('/posts', [PostsController::class, 'index']);
+// User Route
+
+Route::post('/auth/register', [RegisterController::class, 'storeUser']);
