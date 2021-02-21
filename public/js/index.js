@@ -2504,6 +2504,10 @@ var Register = function Register() {
       setPassword = _useState6[1];
 
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  var errors = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (_ref) {
+    var user = _ref.user;
+    return user.errors;
+  });
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
@@ -2522,27 +2526,45 @@ var Register = function Register() {
       onSubmit: function onSubmit(e) {
         return handleSubmit(e);
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-        onChange: function onChange(e) {
-          return setName(e.currentTarget.value);
-        },
-        value: name,
-        type: "text",
-        placeholder: "Name"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-        onChange: function onChange(e) {
-          return setEmail(e.currentTarget.value);
-        },
-        value: email,
-        type: "email",
-        placeholder: "Email"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
-        onChange: function onChange(e) {
-          return setPassword(e.currentTarget.value);
-        },
-        value: password,
-        type: "password",
-        placeholder: "Password"
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          onChange: function onChange(e) {
+            return setName(e.currentTarget.value);
+          },
+          value: name,
+          type: "text",
+          placeholder: "Name"
+        }), errors.name ? errors.name.map(function (error) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            children: error
+          });
+        }) : null]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          onChange: function onChange(e) {
+            return setEmail(e.currentTarget.value);
+          },
+          value: email,
+          type: "text",
+          placeholder: "Email"
+        }), errors.email ? errors.email.map(function (error) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            children: error
+          });
+        }) : null]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          onChange: function onChange(e) {
+            return setPassword(e.currentTarget.value);
+          },
+          value: password,
+          type: "password",
+          placeholder: "Password"
+        }), errors.password ? errors.password.map(function (error) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+            children: error
+          });
+        }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
         type: "submit",
         children: "Store User"
@@ -2752,6 +2774,7 @@ var initApp = function initApp() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "setUser": () => (/* binding */ setUser),
+/* harmony export */   "setError": () => (/* binding */ setError),
 /* harmony export */   "register": () => (/* binding */ register)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
@@ -2773,6 +2796,12 @@ var setUser = function setUser(payload) {
     type: _types__WEBPACK_IMPORTED_MODULE_1__.types.user.SET_USER,
     payload: payload
   };
+};
+var setError = function setError(payload) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_1__.types.user.SET_ERRORS,
+    payload: payload
+  };
 }; // action handlers
 
 var register = function register(data) {
@@ -2785,25 +2814,27 @@ var register = function register(data) {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/auth/register", data);
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().post("/users", data);
 
             case 3:
               res = _context.sent;
               console.log(res);
-              _context.next = 10;
+              dispatch(setError([]));
+              dispatch(setUser(res.data.data));
+              _context.next = 12;
               break;
 
-            case 7:
-              _context.prev = 7;
+            case 9:
+              _context.prev = 9;
               _context.t0 = _context["catch"](0);
-              console.log(_context.t0.message);
+              dispatch(setError(_context.t0.response.data.error));
 
-            case 10:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 7]]);
+      }, _callee, null, [[0, 9]]);
     }));
 
     return function (_x) {
@@ -2919,7 +2950,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var defaultState = {
-  loggedIn: false
+  loggedIn: false,
+  info: {},
+  errors: []
 };
 var userReducer = function userReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
@@ -2928,7 +2961,13 @@ var userReducer = function userReducer() {
   switch (action.type) {
     case _types__WEBPACK_IMPORTED_MODULE_0__.types.user.SET_USER:
       return _objectSpread(_objectSpread({}, state), {}, {
-        loggedIn: action.payload
+        loggedIn: true,
+        info: action.payload
+      });
+
+    case _types__WEBPACK_IMPORTED_MODULE_0__.types.user.SET_ERRORS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        errors: action.payload
       });
 
     default:
@@ -2954,7 +2993,8 @@ var types = {
     LOAD_APP: "LOAD_APP"
   },
   user: {
-    SET_USER: "SET_USER"
+    SET_USER: "SET_USER",
+    SET_ERRORS: "SET_ERRORS"
   }
 };
 

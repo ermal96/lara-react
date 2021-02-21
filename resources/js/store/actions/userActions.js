@@ -7,13 +7,19 @@ export const setUser = (payload) => ({
     payload,
 });
 
+export const setError = (payload) => ({
+    type: types.user.SET_ERRORS,
+    payload,
+});
+
 // action handlers
 export const register = (data) => async (dispatch) => {
     try {
-        const res = await axios.post("/auth/register", data);
-
+        const res = await axios.post("/users", data);
         console.log(res);
+        dispatch(setError([]));
+        dispatch(setUser(res.data.data));
     } catch (error) {
-        console.log(error.message);
+        dispatch(setError(error.response.data.error));
     }
 };

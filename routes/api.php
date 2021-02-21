@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +18,4 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::get('init', [AppController::class, 'init']);
 
 // User Route
-Route::post('auth/register', [RegisterController::class, 'storeUser']);
+Route::post('users', [UserController::class, 'store']);

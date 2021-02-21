@@ -2,6 +2,8 @@ import { types } from "../types";
 
 const defaultState = {
     loggedIn: false,
+    info: {},
+    errors: [],
 };
 
 export const userReducer = (state = defaultState, action) => {
@@ -9,7 +11,14 @@ export const userReducer = (state = defaultState, action) => {
         case types.user.SET_USER:
             return {
                 ...state,
-                loggedIn: action.payload,
+                loggedIn: true,
+                info: action.payload,
+            };
+
+        case types.user.SET_ERRORS:
+            return {
+                ...state,
+                errors: action.payload,
             };
 
         default:
