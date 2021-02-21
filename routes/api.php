@@ -15,8 +15,7 @@ use App\Http\Controllers\Auth\RegisterController;
  */
 
 // App Route
-Route::get('/init', [AppController::class, 'init']);
+Route::get('init', [AppController::class, 'init']);
 
 // User Route
-
-Route::post('/auth/register', [RegisterController::class, 'storeUser']);
+Route::post('auth/register', [RegisterController::class, 'storeUser']);
