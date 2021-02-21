@@ -1,10 +1,10 @@
 .hero {
     display: grid;
-    grid-template-columns: 25rem 1fr;
+    grid-template-columns: 50rem 1fr;
     grid-gap: 5rem;
     place-items: center;
     h1 {
-        font-size: 4rem;
+        font-size: 6rem;
         margin-bottom: 1rem;
 
         span {
@@ -17,8 +17,8 @@
         border: 2px solid var(--primary-color);
         outline: none;
         background: transparent;
-        padding: 0.5rem 1.5rem;
-        margin-top: 1.5rem;
+        padding: 0.8rem 2.5rem;
+        margin-top: 2rem;
         border-radius: 0.3rem;
 
         &:hover {

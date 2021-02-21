@@ -4,6 +4,7 @@ const defaultState = {
     loggedIn: false,
     info: {},
     errors: [],
+    loading: false,
 };
 
 export const userReducer = (state = defaultState, action) => {
@@ -19,6 +20,12 @@ export const userReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 errors: action.payload,
+            };
+
+        case types.user.SET_LOADING:
+            return {
+                ...state,
+                loading: action.payload,
             };
 
         default:

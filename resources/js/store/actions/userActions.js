@@ -12,14 +12,22 @@ export const setError = (payload) => ({
     payload,
 });
 
+export const setLoading = (payload) => ({
+    type: types.user.SET_LOADING,
+    payload,
+});
+
 // action handlers
 export const register = (data) => async (dispatch) => {
     try {
-        const res = await axios.post("/users", data);
+        dispatch(setLoading(true));
+        const res = await axios.post("/auth/register", data);
         console.log(res);
         dispatch(setError([]));
         dispatch(setUser(res.data.data));
+        dispatch(setLoading(false));
     } catch (error) {
         dispatch(setError(error.response.data.error));
+        dispatch(setLoading(false));
     }
 };

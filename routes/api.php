@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,5 +18,6 @@ use App\Http\Controllers\User\UserController;
 // App Route
 Route::get('init', [AppController::class, 'init']);
 
-// User Route
-Route::post('users', [UserController::class, 'store']);
+// Auth Route
+Route::post('auth/register', [RegisterController::class, 'store']);
+Route::post('auth/login', [LoginController::class, 'store']);

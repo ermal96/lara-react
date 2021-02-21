@@ -2,15 +2,26 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Roboto", sans-serif;
     text-decoration: none;
-    color: rgb(54, 54, 56);
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    color: var(--main-color);
+    font-size: 1.6rem;
 }
 
 :root {
+    --main-color: rgb(54, 54, 56);
     --main-bg-color: rgb(252, 246, 246);
     --primary-color: #74a1de;
     --secondary-color: #fd0000;
+    --danger-color: #fa1212;
+    --success-color: rgb(31, 167, 31);
 }
 
 .active {

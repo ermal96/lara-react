@@ -6,5 +6,6 @@ export const types = {
     user: {
         SET_USER: "SET_USER",
         SET_ERRORS: "SET_ERRORS",
+        SET_LOADING: "SET_LOADING",
     },
 };

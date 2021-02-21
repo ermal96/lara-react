@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class RegisterController extends Controller
 {
     public function store(Request $request)
     {
@@ -16,7 +16,8 @@ class UserController extends Controller
         $rules = [
             'name' => 'required',
             'email' => 'required|unique:users',
-            'password' => 'required|min:8',
+            'password' => 'required|min:8|confirmed',
+            'password_confirmation' => 'required',
         ];
 
         $messages = [
@@ -24,6 +25,7 @@ class UserController extends Controller
             'email.email' => 'Email should be type email',
             'email.unique' => 'This is email is taken',
             'password.min' => 'Password should be more than 8 chars',
+            'password.confirmed' => 'Password does not match',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
