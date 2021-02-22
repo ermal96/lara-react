@@ -15,7 +15,7 @@ class RegisterController extends Controller
 
         $rules = [
             'name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|unique:users|email',
             'password' => 'required|min:8|confirmed',
             'password_confirmation' => 'required',
         ];
@@ -40,11 +40,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return response()->json(['status' => 'success', 'message' => 'User stored', 'data' => [
-            'name' => $user->name,
-            'email' => $user->name,
-            'id' => $user->id,
-        ]], 201);
+        return response()->json(['status' => 'success', 'message' => 'User stored', 'data' => $user], 201);
 
     }
 }

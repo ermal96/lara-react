@@ -21,12 +21,34 @@ export const setLoading = (payload) => ({
 export const register = (data) => async (dispatch) => {
     try {
         dispatch(setLoading(true));
+
         const res = await axios.post("/auth/register", data);
-        console.log(res);
+
         dispatch(setError([]));
+
         dispatch(setUser(res.data.data));
+
         dispatch(setLoading(false));
     } catch (error) {
+        dispatch(setError(error.response.data.error));
+        dispatch(setLoading(false));
+    }
+};
+
+export const login = (data) => async (dispatch) => {
+    console.log(data);
+    try {
+        dispatch(setLoading(true));
+
+        const res = await axios.post("/auth/login", data);
+
+        dispatch(setError([]));
+
+        dispatch(setUser(res.data.data));
+
+        dispatch(setLoading(false));
+    } catch (error) {
+        console.log(error.response);
         dispatch(setError(error.response.data.error));
         dispatch(setLoading(false));
     }

@@ -28,6 +28,11 @@ const Navbar = () => {
                     </NavLink>
                 </li>
                 <li>
+                    <NavLink exact to={paths.login}>
+                        Login
+                    </NavLink>
+                </li>
+                <li>
                     <NavLink exact to={paths.register}>
                         Register
                     </NavLink>

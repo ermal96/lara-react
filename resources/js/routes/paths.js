@@ -3,5 +3,6 @@ export const paths = {
     about: "/about",
     blog: "/blog",
     contact: "/contact",
+    login: "/login",
     register: "/register",
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { paths } from "./paths";
-import { Home, About, Blog, Contact, Register } from "../pages";
+import { Home, About, Blog, Contact, Register, Login } from "../pages";
 import { Layout } from "../components";
 
 export const Routes = () => {
@@ -26,6 +26,11 @@ export const Routes = () => {
                 <Route exact path={paths.contact}>
                     <Layout>
                         <Contact />
+                    </Layout>
+                </Route>
+                <Route exact path={paths.login}>
+                    <Layout>
+                        <Login />
                     </Layout>
                 </Route>
                 <Route exact path={paths.register}>
